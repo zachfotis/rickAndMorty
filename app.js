@@ -25,6 +25,9 @@ const getCharacters = async () => {
     }
 
     createOptions(options);
+    createCards(options[0]);
+    // console.log(characters[0]);
+    
 }
 
 const createOptions = async (options) => {
@@ -36,6 +39,7 @@ const createOptions = async (options) => {
         input.setAttribute('name', 'option');
         input.setAttribute('id', `option${index}`);
         input.addEventListener('change', () => {
+            deleteCards();
             createCards(option);            
         })
         const label = document.createElement('label');
@@ -56,9 +60,40 @@ const createOptions = async (options) => {
 const createCards = async (option) => {
     for (const character of characters) {
         if (character.species === option){
-            console.log(option);
-            // TODO: use option's values to create card
+
+            let cardDiv = document.createElement('div');
+            cardDiv.classList.add('card');
+            let imageDiv = document.createElement('div');
+            imageDiv.classList.add('imageContainer');
+            let infoDiv = document.createElement('div');
+            infoDiv.classList.add('infoContainer');
+
+            let image = document.createElement('img');
+            image.setAttribute('src', character.image);
+            imageDiv.appendChild(image);
+
+            let info1 = document.createElement('h2');
+            let info2 = document.createElement('h2');
+            info1.innerText = character.name;
+            info2.innerText = character.origin.name;
+
+
+            infoDiv.appendChild(info1);
+            infoDiv.appendChild(info2);
+
+            cardDiv.appendChild(imageDiv);
+            cardDiv.appendChild(infoDiv);
+
+            let cards = document.querySelector('.cards');
+            cards.appendChild(cardDiv);
         }
+    }
+}
+
+const deleteCards = () => {
+    let cards = document.querySelectorAll('.card');    
+    for (const card of cards) {
+        card.remove();
     }
 }
 
