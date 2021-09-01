@@ -80,23 +80,26 @@ const createCards = async (option) => {
             cardDiv.appendChild(loader);
             
             let image = document.createElement('img');
+            image.setAttribute('loading', 'lazy')
             image.setAttribute('src', character.image);
             image.addEventListener('load', () => {
                 loader.remove();
-                imageDiv.appendChild(image);
-
-                let info1 = document.createElement('h2');
-                let info2 = document.createElement('h2');
-                info1.innerText = character.name;
-                info2.innerText = character.origin.name;
-    
-    
-                infoDiv.appendChild(info1);
-                infoDiv.appendChild(info2);
-    
-                cardDiv.appendChild(imageDiv);
-                cardDiv.appendChild(infoDiv);
             })
+
+            imageDiv.appendChild(image);
+
+            let info1 = document.createElement('h2');
+            let info2 = document.createElement('h2');
+            info1.innerText = character.name;
+            info2.innerText = character.origin.name;
+
+
+            infoDiv.appendChild(info1);
+            infoDiv.appendChild(info2);
+
+            cardDiv.appendChild(imageDiv);
+            cardDiv.appendChild(infoDiv);
+
 
             let cards = document.querySelector('.cards');
             cards.appendChild(cardDiv);
