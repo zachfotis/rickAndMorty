@@ -2,6 +2,11 @@ let characters = [];
 let options = [];
 
 const getCharacters = async () => {
+    let background = document.querySelector('.background');
+    let loader = loading();
+    background.appendChild(loader);
+    
+    
     let data = await axios("https://rickandmortyapi.com/api/character");
     const pages = data.data.info.pages;
 
@@ -24,6 +29,10 @@ const getCharacters = async () => {
         }
     }
 
+    loader.remove();
+    let optionsDiv = document.getElementById('opt');
+    optionsDiv.classList.add('options')
+    
     createOptions(options);
     createCards(options[0]);
     // console.log(characters[0]);
