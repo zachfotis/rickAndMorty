@@ -60,12 +60,14 @@ input[type=radio] {
     border: 0px;
     width: 15px;
     height: 15px;
+    cursor: pointer;
 }
 
 .options label {
     margin-right: 30px;
     font-size: 20px;
     font-weight: 300;
+    cursor: pointer;
 }
 
 /* Cards */
