@@ -67,22 +67,27 @@ const createCards = async (option) => {
             imageDiv.classList.add('imageContainer');
             let infoDiv = document.createElement('div');
             infoDiv.classList.add('infoContainer');
-
+            let loader = loading();
+            cardDiv.appendChild(loader);
+            
             let image = document.createElement('img');
             image.setAttribute('src', character.image);
-            imageDiv.appendChild(image);
+            image.addEventListener('load', () => {
+                loader.remove();
+                imageDiv.appendChild(image);
 
-            let info1 = document.createElement('h2');
-            let info2 = document.createElement('h2');
-            info1.innerText = character.name;
-            info2.innerText = character.origin.name;
-
-
-            infoDiv.appendChild(info1);
-            infoDiv.appendChild(info2);
-
-            cardDiv.appendChild(imageDiv);
-            cardDiv.appendChild(infoDiv);
+                let info1 = document.createElement('h2');
+                let info2 = document.createElement('h2');
+                info1.innerText = character.name;
+                info2.innerText = character.origin.name;
+    
+    
+                infoDiv.appendChild(info1);
+                infoDiv.appendChild(info2);
+    
+                cardDiv.appendChild(imageDiv);
+                cardDiv.appendChild(infoDiv);
+            })
 
             let cards = document.querySelector('.cards');
             cards.appendChild(cardDiv);
@@ -95,6 +100,26 @@ const deleteCards = () => {
     for (const card of cards) {
         card.remove();
     }
+}
+
+const loading = () => {
+    // <div class="lds-ring">
+    //     <div></div>
+    //     <div></div>
+    //     <div></div>
+    //     <div></div>
+    // </div>
+    let ringDiv = document.createElement('div');
+    ringDiv.classList.add('lds-ring')
+    let div1 = document.createElement('div');
+    let div2 = document.createElement('div');
+    let div3 = document.createElement('div');
+    let div4 = document.createElement('div');
+    ringDiv.appendChild(div1);
+    ringDiv.appendChild(div2);
+    ringDiv.appendChild(div3);
+    ringDiv.appendChild(div4);
+    return ringDiv;
 }
 
 getCharacters();
